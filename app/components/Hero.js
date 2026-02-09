@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mt-10 sm:mt-30 flex flex-col-reverse md:flex-row items-center justify-between gap-14">
 
-          {/* Text Content */}
+          {/* Text Contents */}
           <div className="text-center md:text-left max-w-xl">
             <h1 className="text-4xl md:text-5xl font-extrabold text-amber-800 leading-tight">
               Master Mathematics <br />
