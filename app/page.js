@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Qualification from "./components/Qualification";
+import BookSession from "./components/bookSession";
 
 export default function Home() {
   return(
@@ -8,6 +9,7 @@ export default function Home() {
   <Navbar />
   <Hero />
   <Qualification />
+  <BookSession />
   </>
   );
 }
