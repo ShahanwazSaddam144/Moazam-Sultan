@@ -105,10 +105,10 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-sm font-bold text-blue-600 tracking-[0.2em] uppercase mb-4">
+            <h2 className="text-sm font-bold text-orange-600 tracking-[0.2em] uppercase mb-4">
               Learning Library
             </h2>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+            <h3 className="text-4xl md:text-5xl font-extrabold text-orange-900 tracking-tight">
               Interactive <span className="text-blue-600">Tutorials</span>
             </h3>
           </motion.div>
@@ -133,8 +133,8 @@ const Portfolio = () => {
               onClick={() => setFilter(type)}
               className={`px-8 py-3 rounded-2xl text-sm font-bold transition-all border whitespace-nowrap ${
                 filter === type
-                  ? "bg-slate-900 text-white border-slate-900 shadow-lg"
-                  : "bg-white text-slate-500 border-slate-100 hover:border-blue-200"
+                  ? "bg-amber-900 text-white border-amber-900 shadow-lg"
+                  : "bg-amber-50 text-gray-500 border-orange-100 hover:border-orange-200"
               }`}
             >
               {type === "all" ? "Everything" : type === "intro" ? "About Me" : "Full Lessons"}
@@ -171,13 +171,13 @@ const Portfolio = () => {
                 </div>
 
                 <div className="p-8">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-3 block">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-orange-600 mb-3 block">
                     {item.category}
                   </span>
-                  <h4 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                  <h4 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-orange-600 transition-colors">
                     {item.title}
                   </h4>
-                  <p className="text-slate-500 text-sm line-clamp-2 leading-relaxed">
+                  <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -189,7 +189,7 @@ const Portfolio = () => {
                 layout
                 href="https://www.youtube.com/@iammoazzamsultan"
                 target="_blank"
-                className="group flex flex-col items-center justify-center p-8 bg-slate-50 border-2 border-dashed border-slate-200 rounded-[2rem] hover:border-blue-300 hover:bg-blue-50/30 transition-all duration-300"
+                className="group flex flex-col items-center justify-center p-8 bg-gray-50 border-2 border-dashed border-slate-200 rounded-[2rem] hover:border-blue-300 hover:bg-blue-50/30 transition-all duration-300"
               >
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md mb-4 group-hover:scale-110 transition-transform">
                   <Youtube className="text-red-600" size={32} />
@@ -212,8 +212,8 @@ const Portfolio = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] bg-slate-900/98 backdrop-blur-xl flex items-center justify-center p-0 md:p-8"
-              onClick={() => setSelectedItem(null)} // Click overlay to close
+              className="fixed inset-0 z-[9999] bg-orange-900/95 backdrop-blur-xl flex items-center justify-center p-0 md:p-8"
+              onClick={() => setSelectedItem(null)} 
             >
               {/* IMPROVED CLOSE BUTTON: Outside container, high z-index */}
               <button
@@ -250,12 +250,12 @@ const Portfolio = () => {
                 <div className="w-full lg:w-[35%] p-8 md:p-12 overflow-y-auto flex flex-col bg-white">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-6">
-                       <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded-lg">
+                       <span className="px-3 py-1 bg-amber-50 text-orange-600 text-[10px] font-black uppercase tracking-widest rounded-lg">
                         {selectedItem.category}
                       </span>
                     </div>
                     
-                    <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-6 leading-[1.1]">
+                    <h3 className="text-2xl md:text-4xl font-black text-gray-900 mb-6 leading-[1.1]">
                       {selectedItem.title}
                     </h3>
                     
@@ -276,7 +276,7 @@ const Portfolio = () => {
                     <a
                       href={selectedItem.videoUrl}
                       target="_blank"
-                      className="flex items-center justify-center gap-3 w-full py-5 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl group"
+                      className="flex items-center justify-center gap-3 w-full py-5 bg-amber-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl group"
                     >
                       Watch on YouTube 
                       <ExternalLink size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
