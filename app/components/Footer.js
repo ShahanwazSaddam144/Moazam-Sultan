@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Logo / Name */}
         <div className="flex items-center gap-2 text-amber-800 font-bold text-xl">
           <User className="w-6 h-6" />
-          <span>Moazam Sultan</span>
+          <span>Moazzam Sultan</span>
         </div>
 
         {/* Contact */}
@@ -21,7 +21,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="text-gray-500 text-sm text-center md:text-right">
-          &copy; {new Date().getFullYear()} Moazam Sultan. All rights reserved.
+          &copy; {new Date().getFullYear()} Moazzam Sultan. All rights reserved.
         </p>
       </div>
     </footer>
