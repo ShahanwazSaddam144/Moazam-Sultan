@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import Navbar from "./Navbar";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { Check, GraduationCap, Layers } from "lucide-react";
 
@@ -34,8 +34,6 @@ const Services = () => {
 
   return (
     <>
-      <Navbar />
-
       {/* OUTER CONTAINER */}
       <section ref={sectionRef} id="services" className="bg-orange-50/40 py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -160,6 +158,7 @@ const Services = () => {
               </div>
 
               {/* CTA */}
+              <Link href="#contact">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -167,6 +166,7 @@ const Services = () => {
               >
                 Contact for Classes
               </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
