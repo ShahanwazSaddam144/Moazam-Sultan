@@ -24,7 +24,7 @@ const Navbar = () => {
             />
             <div>
               <h1 className="text-lg font-bold text-white leading-none">
-                Moazam Sultan
+                Moazzam Sultan
               </h1>
               <p className="text-xs text-amber-100 tracking-wide">
                 Mathematics Tutor
