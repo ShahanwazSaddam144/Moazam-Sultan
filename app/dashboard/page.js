@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { X, Eye, EyeOff } from "lucide-react";
 import Navbar from "../components/Navbar";
 
@@ -10,6 +10,8 @@ const Dashboard = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [popup, setPopup] = useState({ show: false, message: "" });
   const [sessions, setSessions] = useState([]);
+  const [loadingSessions, setLoadingSessions] = useState(false);
+  const [errorSessions, setErrorSessions] = useState("");
 
   const handleLogin = () => {
     if (
@@ -24,12 +26,22 @@ const Dashboard = () => {
   };
 
   const fetchSessions = async () => {
+    setLoadingSessions(true);
+    setErrorSessions("");
     try {
       const res = await fetch("/api/bookSession");
       const data = await res.json();
-      if (data.success) setSessions(data.sessions);
+
+      if (data.success) {
+        setSessions(data.sessions);
+      } else {
+        setErrorSessions(data.message || "Failed to load sessions");
+      }
     } catch (err) {
       console.error(err);
+      setErrorSessions("Server error. Please try again later.");
+    } finally {
+      setLoadingSessions(false);
     }
   };
 
@@ -39,15 +51,12 @@ const Dashboard = () => {
       <section className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-50 flex items-center justify-center py-20 px-4">
         {!loggedIn ? (
           <div className="max-w-lg w-full bg-white rounded-3xl shadow-2xl p-10 relative overflow-hidden">
+            {/* Decorative circles */}
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-amber-300 rounded-full opacity-40 animate-pulse"></div>
             <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-orange-300 rounded-full opacity-30 animate-pulse"></div>
 
-            <h2 className="text-4xl font-extrabold text-amber-800 text-center mb-2">
-              Client Login
-            </h2>
-            <p className="text-gray-600 text-center mb-8">
-              Enter credentials to access booked sessions
-            </p>
+            <h2 className="text-4xl font-extrabold text-amber-800 text-center mb-2">Client Login</h2>
+            <p className="text-gray-600 text-center mb-8">Enter credentials to access booked sessions</p>
 
             <div className="space-y-5">
               <input
@@ -57,7 +66,6 @@ const Dashboard = () => {
                 onChange={(e) => setLogin({ ...login, username: e.target.value })}
                 className="w-full rounded-xl border border-amber-200 px-5 py-3 focus:ring-2 focus:ring-amber-400 outline-none transition shadow-sm"
               />
-
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -73,7 +81,6 @@ const Dashboard = () => {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </span>
               </div>
-
               <button
                 onClick={handleLogin}
                 className="w-full rounded-xl bg-amber-600 px-6 py-3 font-semibold text-white hover:bg-amber-700 transition text-lg shadow-md hover:shadow-lg"
@@ -84,14 +91,14 @@ const Dashboard = () => {
           </div>
         ) : (
           <div className="w-full max-w-6xl mx-auto px-4">
-            <h2 className="text-4xl font-extrabold text-amber-800 mb-10 text-center">
-              Booked Sessions
-            </h2>
+            <h2 className="text-4xl font-extrabold text-amber-800 mb-10 text-center">Booked Sessions</h2>
 
-            {sessions.length === 0 ? (
-              <p className="text-center text-gray-600 text-lg">
-                No sessions booked yet.
-              </p>
+            {loadingSessions ? (
+              <p className="text-center text-gray-600 text-lg">Loading sessions...</p>
+            ) : errorSessions ? (
+              <p className="text-center text-red-600 text-lg">{errorSessions}</p>
+            ) : sessions.length === 0 ? (
+              <p className="text-center text-gray-600 text-lg">No sessions booked yet.</p>
             ) : (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {sessions.map((s) => (
