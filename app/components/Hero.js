@@ -97,6 +97,23 @@ const Hero = () => {
     sliderRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
+  // Touch support for mobile
+  const handleTouchStart = (e) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    startX.current = e.touches[0].pageX - sliderRef.current.offsetLeft;
+    scrollLeft.current = sliderRef.current.scrollLeft;
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging || !sliderRef.current) return;
+    const x = e.touches[0].pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    sliderRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const handleTouchEnd = () => setIsDragging(false);
+
   return (
     <section
       className="min-h-screen pt-24 bg-gradient-to-b from-amber-50 to-orange-100 overflow-hidden"
@@ -172,6 +189,9 @@ const Hero = () => {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           className={`flex gap-8 whitespace-nowrap overflow-x-auto cursor-grab ${!isDragging ? "animate-scroll" : ""}`}
         >
           {[...stats, ...stats].map((stat, i) => (
@@ -191,12 +211,23 @@ const Hero = () => {
 
       {/* Animations */}
       <style jsx>{`
+        /* Scroll Animation */
         @keyframes scroll {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
         }
         .animate-scroll { animation: scroll 25s linear infinite; }
 
+        /* Faster scroll on smaller screens */
+        @media (max-width: 768px) {
+          .animate-scroll { animation: scroll 12s linear infinite; }
+        }
+
+        /* Hide Scrollbar (Webkit) */
+        .animate-scroll::-webkit-scrollbar { display: none; }
+        .animate-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Floating Image Animation */
         @keyframes float {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -209,9 +240,7 @@ const Hero = () => {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-6px); }
         }
-        .badge-animate {
-          animation: badge-bounce 2s ease-in-out infinite;
-        }
+        .badge-animate { animation: badge-bounce 2s ease-in-out infinite; }
       `}</style>
     </section>
   );
