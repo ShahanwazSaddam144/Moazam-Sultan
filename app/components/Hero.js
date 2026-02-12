@@ -81,16 +81,12 @@ const Hero = () => {
 
   const handleMouseLeave = () => {
     setIsDragging(false);
-    if (sliderRef.current) {
-      sliderRef.current.style.cursor = "grab";
-    }
+    if (sliderRef.current) sliderRef.current.style.cursor = "grab";
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    if (sliderRef.current) {
-      sliderRef.current.style.cursor = "grab";
-    }
+    if (sliderRef.current) sliderRef.current.style.cursor = "grab";
   };
 
   const handleMouseMove = (e) => {
@@ -112,29 +108,24 @@ const Hero = () => {
           {/* Text */}
           <div className="text-center md:text-left max-w-xl">
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight min-h-[120px]">
-              <span className="text-amber-800">
-                {displayedText.slice(0, text1.length)}
-              </span>
-              <span className="text-orange-500">
-                {displayedText.slice(text1.length)}
-              </span>
+              <span className="text-amber-800">{displayedText.slice(0, text1.length)}</span>
+              <span className="text-orange-500">{displayedText.slice(text1.length)}</span>
               <span className="border-r-4 border-orange-500 animate-pulse ml-1"></span>
             </h1>
 
             <p className="mt-4 text-gray-700 text-lg">
-              Personalized math tutoring for school, college, and competitive
-              exams. Learn concepts clearly, solve faster, and score higher.
+              Personalized math tutoring for school, college, and competitive exams. Learn concepts clearly, solve faster, and score higher.
             </p>
 
             {/* Badges */}
             <div className="mt-5 flex flex-wrap gap-4 justify-center md:justify-start text-gray-600">
-              <div className="bg-amber-100 border-2 border-amber-600 px-4 py-2 rounded-lg font-medium text-sm">
+              <div className="badge-animate bg-amber-100 border-2 border-amber-600 px-4 py-2 rounded-lg font-medium text-sm">
                 O/A Level
               </div>
-              <div className="bg-amber-100 border-2 border-amber-600 px-4 py-2 rounded-lg font-medium text-sm">
+              <div className="badge-animate bg-amber-100 border-2 border-amber-600 px-4 py-2 rounded-lg font-medium text-sm">
                 Punjab Board
               </div>
-              <div className="bg-amber-100 border-2 border-amber-600 px-4 py-2 rounded-lg font-medium text-sm">
+              <div className="badge-animate bg-amber-100 border-2 border-amber-600 px-4 py-2 rounded-lg font-medium text-sm">
                 Calculus
               </div>
             </div>
@@ -181,9 +172,7 @@ const Hero = () => {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
-          className={`flex gap-8 whitespace-nowrap overflow-x-auto cursor-grab ${
-            !isDragging ? "animate-scroll" : ""
-          }`}
+          className={`flex gap-8 whitespace-nowrap overflow-x-auto cursor-grab ${!isDragging ? "animate-scroll" : ""}`}
         >
           {[...stats, ...stats].map((stat, i) => (
             <div
@@ -193,9 +182,7 @@ const Hero = () => {
               {stat.icon}
               <div>
                 <p className="text-sm text-gray-600">{stat.title}</p>
-                <p className="font-bold text-amber-700 text-lg">
-                  {stat.value}
-                </p>
+                <p className="font-bold text-amber-700 text-lg">{stat.value}</p>
               </div>
             </div>
           ))}
@@ -208,17 +195,22 @@ const Hero = () => {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
         }
-        .animate-scroll {
-          animation: scroll 25s linear infinite;
-        }
+        .animate-scroll { animation: scroll 25s linear infinite; }
 
         @keyframes float {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
           100% { transform: translateY(0px); }
         }
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* Badge Animation */
+        @keyframes badge-bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
+        .badge-animate {
+          animation: badge-bounce 2s ease-in-out infinite;
         }
       `}</style>
     </section>
